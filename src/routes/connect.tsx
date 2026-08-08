@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Building2, Check, Landmark, ShieldCheck, Sparkles } from "lucide-react";
 
 import { ProgressRail } from "@/components/onboarding/progress-rail";
-import { SAMPLE } from "@/lib/finwise";
+import { INDUSTRIES, SAMPLE } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
 export const Route = createFileRoute("/connect")({
@@ -27,7 +27,8 @@ export const Route = createFileRoute("/connect")({
 
 function ConnectScreen() {
   const navigate = useNavigate();
-  const { setSynced } = useOnboarding();
+  const { setSynced, industry } = useOnboarding();
+  const config = INDUSTRIES[industry];
   const [syncing, setSyncing] = useState(false);
   const [progress, setProgress] = useState(0);
   const timers = useRef<ReturnType<typeof setInterval>[]>([]);
@@ -78,7 +79,7 @@ function ConnectScreen() {
               <Sparkles strokeWidth={1.5} className="size-6 shrink-0" />
               <span>
                 <span className="block text-[15px] font-medium">
-                  Explore with pre-filled sample data
+                  Explore with Pre-filled {config.label} Data
                 </span>
                 <span className="mt-0.5 block text-[13px] opacity-80">
                   Ready in about 3 seconds · Recommended
@@ -116,7 +117,7 @@ function ConnectScreen() {
           <div className="mt-8 rounded-3xl border border-border/70 bg-card/70 p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.3)] backdrop-blur-2xl">
             <div className="flex items-baseline justify-between">
               <p className="text-[15px] font-medium">
-                {progress >= 1 ? "Sync complete" : "Syncing sample business…"}
+                {progress >= 1 ? "Sync complete" : config.syncLine}
               </p>
               <span className="text-[13px] tabular-nums text-muted-foreground">
                 {Math.round(progress * 100)}%

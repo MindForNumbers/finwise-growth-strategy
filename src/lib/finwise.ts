@@ -16,6 +16,42 @@ export const SAMPLE = {
 
 export type Health = "healthy" | "at-risk" | "shortfall";
 
+export type Industry = "ecommerce" | "agency" | "services" | "default";
+
+export const INDUSTRIES: Record<
+  Industry,
+  { id: Industry; label: string; overhead: number; syncLine: string; recommendation: string }
+> = {
+  ecommerce: {
+    id: "ecommerce",
+    label: "E-commerce",
+    overhead: 28000,
+    syncLine: "Syncing… 3 inventory vendors detected.",
+    recommendation: "Reduce inventory reorder volume.",
+  },
+  agency: {
+    id: "agency",
+    label: "Digital Agency",
+    overhead: 15000,
+    syncLine: "Syncing… 4 recurring software subscriptions detected.",
+    recommendation: "Reduce software spend.",
+  },
+  services: {
+    id: "services",
+    label: "Professional Services",
+    overhead: 8000,
+    syncLine: "Syncing… 1,350 transactions auto-categorized.",
+    recommendation: "Delay contractor payouts.",
+  },
+  default: {
+    id: "default",
+    label: "Sample Business",
+    overhead: 15000,
+    syncLine: "Syncing… 1,350 transactions auto-categorized.",
+    recommendation: "Delay contractor payouts.",
+  },
+};
+
 export interface Projection {
   series: { day: number; balance: number }[];
   runwayDays: number | null;

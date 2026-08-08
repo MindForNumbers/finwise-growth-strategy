@@ -5,7 +5,7 @@ import { AlertTriangle, CheckCircle2, RotateCcw, TrendingDown } from "lucide-rea
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
 import { RunwayChart } from "@/components/onboarding/runway-chart";
-import { SAMPLE, money, project } from "@/lib/finwise";
+import { INDUSTRIES, SAMPLE, money, project, type Industry } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
 export const Route = createFileRoute("/runway")({
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/runway")({
 });
 
 function RunwayScreen() {
-  const { overhead, reset } = useOnboarding();
+  const { overhead, reset, industry } = useOnboarding();
   const [deltaPct, setDeltaPct] = useState(0);
   const p = project(overhead, deltaPct / 100);
 
@@ -158,7 +158,7 @@ function RunwayScreen() {
             )}
             Insight
           </p>
-          <p className="mt-2 text-[16px] leading-relaxed">{insight(p, deltaPct)}</p>
+          <p className="mt-2 text-[16px] leading-relaxed">{insight(p, deltaPct, industry)}</p>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-[13px]">
@@ -179,13 +179,14 @@ function RunwayScreen() {
   );
 }
 
-function insight(p: ReturnType<typeof project>, deltaPct: number) {
+function insight(p: ReturnType<typeof project>, deltaPct: number, industry: Industry) {
+  const rec = INDUSTRIES[industry].recommendation;
   const drop = deltaPct < 0 ? `A ${Math.abs(deltaPct)}% revenue drop` : null;
   if (p.shortfallWeek !== null) {
-    return `Warning: ${drop ?? "Your current run rate"} causes a shortfall by week ${p.shortfallWeek}. Recommendation: reduce software spend (${money(SAMPLE.topCategories[2]!.amount)}/mo) and delay one inventory restock to buy roughly 11 days.`;
+    return `Warning: ${drop ?? "Your current run rate"} creates a cash shortfall by Week ${p.shortfallWeek}. Recommendation: ${rec}`;
   }
   if (deltaPct < 0) {
-    return `You absorb a ${Math.abs(deltaPct)}% revenue drop and still stay above zero for 90 days, ending at ${money(p.balanceAt(90))}. Recommendation: hold ${money(Math.max(p.netDaily * 30, 0))} back as a buffer before hiring.`;
+    return `You absorb a ${Math.abs(deltaPct)}% revenue drop and still stay above zero for 90 days, ending at ${money(p.balanceAt(90))}. Recommendation: hold ${money(Math.max(p.netDaily * 30, 0))} back as a buffer — and if it tightens, ${rec.charAt(0).toLowerCase() + rec.slice(1)}`;
   }
   if (deltaPct > 0) {
     return `At +${deltaPct}% revenue you end day 90 with ${money(p.balanceAt(90))}. Recommendation: that surplus covers roughly one additional part-time roaster without touching your reserve.`;
