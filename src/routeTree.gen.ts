@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as DriversRouteImport } from './routes/drivers'
+import { Route as RunwayRouteImport } from './routes/runway'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const DriversRoute = DriversRouteImport.update({
   path: '/drivers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RunwayRoute = RunwayRouteImport.update({
+  id: '/runway',
+  path: '/runway',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/connect': typeof ConnectRoute
   '/drivers': typeof DriversRoute
+  '/runway': typeof RunwayRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/connect': typeof ConnectRoute
   '/drivers': typeof DriversRoute
+  '/runway': typeof RunwayRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/connect': typeof ConnectRoute
   '/drivers': typeof DriversRoute
+  '/runway': typeof RunwayRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/connect' | '/drivers'
+  fullPaths: '/' | '/connect' | '/drivers' | '/runway'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/connect' | '/drivers'
-  id: '__root__' | '/' | '/connect' | '/drivers'
+  to: '/' | '/connect' | '/drivers' | '/runway'
+  id: '__root__' | '/' | '/connect' | '/drivers' | '/runway'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConnectRoute: typeof ConnectRoute
   DriversRoute: typeof DriversRoute
+  RunwayRoute: typeof RunwayRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriversRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/runway': {
+      id: '/runway'
+      path: '/runway'
+      fullPath: '/runway'
+      preLoaderRoute: typeof RunwayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConnectRoute: ConnectRoute,
   DriversRoute: DriversRoute,
+  RunwayRoute: RunwayRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
