@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { ArrowRight, Check, FileText, LineChart, Receipt, Users } from "lucide-react";
 
 import { ProgressRail } from "@/components/onboarding/progress-rail";
+import { INDUSTRIES, type Industry } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
 export const Route = createFileRoute("/")({
@@ -39,9 +40,18 @@ const GOALS = [
 ];
 
 function IntentScreen() {
-  const { goal, setGoal } = useOnboarding();
+  const { goal, setGoal, industry, setIndustry } = useOnboarding();
   const [configured, setConfigured] = useState(false);
   const navigate = useNavigate();
+
+  const chooseIndustry = (id: Industry) => {
+    setIndustry(id);
+    setConfigured(true);
+    toast.success(`Personalized for ${INDUSTRIES[id].label}.`, {
+      description: "Loading your workspace…",
+    });
+    setTimeout(() => navigate({ to: "/connect" }), 650);
+  };
 
   const select = (id: string, title: string) => {
     setGoal(id);
@@ -129,7 +139,45 @@ function IntentScreen() {
               Continue
               <ArrowRight strokeWidth={2} className="size-4" />
             </button>
-            <p className="mt-3 text-center text-[13px] text-muted-foreground">
+            <div className="mt-9">
+              <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
+                What kind of business are you?
+              </p>
+              <p className="mt-1.5 text-[13px] text-muted-foreground">
+                We&apos;ll pre-fill your overhead and vendor data to match.
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {(["ecommerce", "agency", "services"] as Industry[]).map((id) => {
+                  const selected = industry === id;
+                  return (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => chooseIndustry(id)}
+                      className={
+                        "rounded-2xl border p-4 text-left text-[15px] font-medium transition-all duration-200 active:scale-[0.99] " +
+                        (selected
+                          ? "border-primary bg-primary/[0.06] text-primary"
+                          : "border-border bg-card hover:border-foreground/20 hover:bg-accent")
+                      }
+                    >
+                      {INDUSTRIES[id].label}
+                      <span className="mt-0.5 block text-[13px] font-normal text-muted-foreground">
+                        Overhead ≈ ${INDUSTRIES[id].overhead.toLocaleString("en-US")}/mo
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={() => chooseIndustry("default")}
+                className="mt-4 w-full text-center text-[13px] text-primary hover:underline"
+              >
+                Skip for now (Use Default)
+              </button>
+            </div>
+            <p className="mt-5 text-center text-[13px] text-muted-foreground">
               Free 14-day trial · No card required
             </p>
           </div>
