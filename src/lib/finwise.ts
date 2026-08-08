@@ -38,7 +38,7 @@ export function project(overhead: number, revenueDelta: number): Projection {
 
   series.push({ day: 0, balance });
   for (let day = 1; day <= 90; day++) {
-    const inflow = dailyRevenue * WEEKDAY_FACTOR[day % 7];
+    const inflow = dailyRevenue * (WEEKDAY_FACTOR[day % 7] ?? 1);
     // Payroll lands on the 1st and 15th of each 30-day cycle.
     const payrollDay = day % 30 === 1 || day % 30 === 15;
     const outflow = dailyExpense + (payrollDay ? 10700 : 0);
@@ -54,7 +54,7 @@ export function project(overhead: number, revenueDelta: number): Projection {
   return {
     series,
     runwayDays,
-    balanceAt: (day) => series[Math.min(Math.max(day, 0), 90)].balance,
+    balanceAt: (day) => series[Math.min(Math.max(day, 0), 90)]?.balance ?? 0,
     health,
     netDaily,
     breakEvenDaily: (overhead + 2 * 10700) / 30,
