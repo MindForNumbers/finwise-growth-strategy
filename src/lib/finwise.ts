@@ -1,13 +1,13 @@
 export const SAMPLE = {
   company: "FinWise Co. — Northgate Coffee Roasters",
-  openingBalance: 84200,
+  openingBalance: 22400,
   transactions: 1402,
   categorized: 1350,
   accounts: 3,
   monthlyRevenue: 46800,
   defaultOverhead: 18400,
   topCategories: [
-    { name: "Payroll", amount: 21400 },
+    { name: "Payroll", amount: 26400 },
     { name: "Inventory & COGS", amount: 12850 },
     { name: "Software", amount: 3120 },
     { name: "Rent & Utilities", amount: 5400 },
@@ -41,13 +41,13 @@ export function project(overhead: number, revenueDelta: number): Projection {
     const inflow = dailyRevenue * (WEEKDAY_FACTOR[day % 7] ?? 1);
     // Payroll lands on the 1st and 15th of each 30-day cycle.
     const payrollDay = day % 30 === 1 || day % 30 === 15;
-    const outflow = dailyExpense + (payrollDay ? 10700 : 0);
+    const outflow = dailyExpense + (payrollDay ? 13200 : 0);
     balance = balance + inflow - outflow;
     series.push({ day, balance });
     if (runwayDays === null && balance < 0) runwayDays = day;
   }
 
-  const netDaily = dailyRevenue - dailyExpense - (2 * 10700) / 30;
+  const netDaily = dailyRevenue - dailyExpense - (2 * 13200) / 30;
   const health: Health =
     runwayDays === null ? (netDaily > 0 ? "healthy" : "at-risk") : runwayDays <= 45 ? "shortfall" : "at-risk";
 
@@ -57,7 +57,7 @@ export function project(overhead: number, revenueDelta: number): Projection {
     balanceAt: (day) => series[Math.min(Math.max(day, 0), 90)]?.balance ?? 0,
     health,
     netDaily,
-    breakEvenDaily: (overhead + 2 * 10700) / 30,
+    breakEvenDaily: (overhead + 2 * 13200) / 30,
     shortfallWeek: runwayDays === null ? null : Math.max(1, Math.ceil(runwayDays / 7)),
   };
 }

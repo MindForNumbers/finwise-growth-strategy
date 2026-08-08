@@ -79,7 +79,7 @@ function DriversScreen() {
             </p>
             <p className="mt-1.5 flex items-start gap-1.5 text-[13px] text-muted-foreground">
               <Info strokeWidth={1.5} className="mt-0.5 size-3.5 shrink-0" />
-              Includes semi-monthly payroll of {money(10700)} detected in your{" "}
+              Includes semi-monthly payroll of {money(13200)} detected in your{" "}
               {SAMPLE.transactions.toLocaleString("en-US")} transactions.
             </p>
           </div>
