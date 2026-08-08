@@ -3,7 +3,7 @@ import { ArrowRight, Info } from "lucide-react";
 
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
-import { SAMPLE, money, project } from "@/lib/finwise";
+import { INDUSTRIES, SAMPLE, money, project } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
 export const Route = createFileRoute("/drivers")({
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/drivers")({
 });
 
 function DriversScreen() {
-  const { overhead, setOverhead } = useOnboarding();
+  const { overhead, setOverhead, industry } = useOnboarding();
   const navigate = useNavigate();
   const breakEven = project(overhead, 0).breakEvenDaily;
 
@@ -47,7 +47,7 @@ function DriversScreen() {
               Estimated monthly overhead
             </p>
             <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
-              Pre-filled
+              Pre-filled · {INDUSTRIES[industry].label}
             </span>
           </div>
           <p className="mt-2 text-5xl font-semibold tracking-tight tabular-nums">
@@ -71,7 +71,7 @@ function DriversScreen() {
 
           <div className="mt-7 rounded-2xl bg-accent p-4">
             <p className="text-[15px] leading-relaxed">
-              At this rate, your business needs to generate{" "}
+              At {money(overhead)}/month overhead, your business needs to generate{" "}
               <span className="font-semibold text-primary tabular-nums">
                 {money(breakEven)}/day
               </span>{" "}
