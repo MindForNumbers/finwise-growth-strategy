@@ -102,6 +102,13 @@ function RunwayScreen() {
               );
             })}
           </div>
+
+          <Link
+            to="/stress-test"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-[16px] font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_var(--color-primary)] transition-transform hover:brightness-105 active:scale-[0.985]"
+          >
+            Enable Weekly Stress Test 🛡️
+          </Link>
         </div>
 
         <div className="mt-5 rounded-3xl border border-border bg-card p-6">
