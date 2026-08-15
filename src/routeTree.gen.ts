@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as DriversRouteImport } from './routes/drivers'
 import { Route as RunwayRouteImport } from './routes/runway'
+import { Route as StressTestRouteImport } from './routes/stress-test'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const RunwayRoute = RunwayRouteImport.update({
   path: '/runway',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StressTestRoute = StressTestRouteImport.update({
+  id: '/stress-test',
+  path: '/stress-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/connect': typeof ConnectRoute
   '/drivers': typeof DriversRoute
   '/runway': typeof RunwayRoute
+  '/stress-test': typeof StressTestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/connect': typeof ConnectRoute
   '/drivers': typeof DriversRoute
   '/runway': typeof RunwayRoute
+  '/stress-test': typeof StressTestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/connect': typeof ConnectRoute
   '/drivers': typeof DriversRoute
   '/runway': typeof RunwayRoute
+  '/stress-test': typeof StressTestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/connect' | '/drivers' | '/runway'
+  fullPaths: '/' | '/connect' | '/drivers' | '/runway' | '/stress-test'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/connect' | '/drivers' | '/runway'
-  id: '__root__' | '/' | '/connect' | '/drivers' | '/runway'
+  to: '/' | '/connect' | '/drivers' | '/runway' | '/stress-test'
+  id: '__root__' | '/' | '/connect' | '/drivers' | '/runway' | '/stress-test'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   ConnectRoute: typeof ConnectRoute
   DriversRoute: typeof DriversRoute
   RunwayRoute: typeof RunwayRoute
+  StressTestRoute: typeof StressTestRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RunwayRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/stress-test': {
+      id: '/stress-test'
+      path: '/stress-test'
+      fullPath: '/stress-test'
+      preLoaderRoute: typeof StressTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectRoute: ConnectRoute,
   DriversRoute: DriversRoute,
   RunwayRoute: RunwayRoute,
+  StressTestRoute: StressTestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
