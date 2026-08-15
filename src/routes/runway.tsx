@@ -288,14 +288,7 @@ function CapitalOptimizer() {
         You have <span className="font-semibold">$15,000</span> in idle float this week.{" "}
         {!transferred ? (
           <>
-            <button
-              type="button"
-              onClick={() => setTransferred(true)}
-              className="inline-flex items-center gap-1 font-semibold text-primary hover:underline active:opacity-70"
-            >
-              1-Tap Transfer
-            </button>{" "}
-            to your high-yield sweep account to generate an estimated{" "}
+            Transfer it to your high-yield sweep account to generate an estimated{" "}
             <span className="font-semibold">$60</span> by Friday.
           </>
         ) : (
@@ -305,6 +298,15 @@ function CapitalOptimizer() {
           </span>
         )}
       </p>
+      {!transferred && (
+        <button
+          type="button"
+          onClick={() => setTransferred(true)}
+          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2 text-[13px] font-semibold text-primary-foreground shadow-[0_8px_20px_-12px_var(--color-primary)] transition-transform hover:brightness-105 active:scale-[0.985]"
+        >
+          1-Tap Transfer
+        </button>
+      )}
     </div>
   );
 }
