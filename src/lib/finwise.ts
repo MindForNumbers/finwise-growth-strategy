@@ -20,7 +20,14 @@ export type Industry = "ecommerce" | "agency" | "services" | "default";
 
 export const INDUSTRIES: Record<
   Industry,
-  { id: Industry; label: string; overhead: number; syncLine: string; recommendation: string }
+  {
+    id: Industry;
+    label: string;
+    overhead: number;
+    syncLine: string;
+    recommendation: string;
+    threat: string;
+  }
 > = {
   ecommerce: {
     id: "ecommerce",
@@ -28,6 +35,8 @@ export const INDUSTRIES: Record<
     overhead: 28000,
     syncLine: "Syncing… 3 inventory vendors detected.",
     recommendation: "Reduce inventory reorder volume.",
+    threat:
+      "Market Alert: Global freight costs rose 4% this week. Adjust the scenario slider to see how this impacts your 90-day cash buffer.",
   },
   agency: {
     id: "agency",
@@ -35,6 +44,8 @@ export const INDUSTRIES: Record<
     overhead: 15000,
     syncLine: "Syncing… 4 recurring software subscriptions detected.",
     recommendation: "Reduce software spend.",
+    threat:
+      "Market Alert: B2B SaaS subscription averages increased by $200/mo. Adjust the scenario slider to stress-test your overhead.",
   },
   services: {
     id: "services",
@@ -42,6 +53,8 @@ export const INDUSTRIES: Record<
     overhead: 8000,
     syncLine: "Syncing… 1,350 transactions auto-categorized.",
     recommendation: "Delay contractor payouts.",
+    threat:
+      "Market Alert: Average industry invoice payout delayed by +5 days. Adjust the scenario slider to test your float.",
   },
   default: {
     id: "default",
@@ -49,6 +62,8 @@ export const INDUSTRIES: Record<
     overhead: 15000,
     syncLine: "Syncing… 1,350 transactions auto-categorized.",
     recommendation: "Delay contractor payouts.",
+    threat:
+      "Market Alert: Average industry invoice payout delayed by +5 days. Adjust the scenario slider to test your float.",
   },
 };
 

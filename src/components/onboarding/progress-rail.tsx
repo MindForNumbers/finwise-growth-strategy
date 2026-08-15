@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 
-const STEPS = ["/", "/connect", "/drivers", "/runway"] as const;
+const STEPS = ["/", "/connect", "/drivers", "/runway", "/stress-test"] as const;
 
 export function ProgressRail({ step, back }: { step: number; back?: string }) {
   return (
@@ -36,7 +36,7 @@ export function ProgressRail({ step, back }: { step: number; back?: string }) {
           ))}
         </div>
         <div className="w-20 text-right text-xs text-muted-foreground tabular-nums">
-          {step + 1} of 4
+          {step + 1} of {STEPS.length}
         </div>
       </div>
     </header>
