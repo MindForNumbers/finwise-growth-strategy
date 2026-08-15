@@ -1,6 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { AlertTriangle, CheckCircle2, RotateCcw, TrendingDown } from "lucide-react";
+import {
+  AlertTriangle,
+  ArrowUp,
+  CheckCircle2,
+  Receipt,
+  RotateCcw,
+  TrendingDown,
+  Wallet,
+} from "lucide-react";
 
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
@@ -62,7 +70,18 @@ function RunwayScreen() {
           </span>
         </div>
 
-        <div className="mt-5 rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.4)]">
+        {/* Daily engagement layer */}
+        <section className="mt-5 space-y-5" aria-label="Daily cash activity">
+          <VelocityTicker />
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+            <ReceivablesRadar />
+            <CapitalOptimizer />
+          </div>
+        </section>
+
+        <div className="my-6 h-px bg-border" />
+
+        <div className="rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.4)]">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-[13px] uppercase tracking-wide text-muted-foreground">
@@ -182,6 +201,110 @@ function RunwayScreen() {
           </Link>
         </div>
       </main>
+    </div>
+  );
+}
+
+function VelocityTicker() {
+  return (
+    <div className="rounded-3xl border border-border bg-card p-6 sm:p-7">
+      <p className="text-[13px] text-muted-foreground">Today&apos;s Net Cash Velocity</p>
+      <div className="mt-2 flex items-baseline gap-2">
+        <span className="text-[42px] font-semibold tracking-tight text-[var(--color-positive)] sm:text-[56px]">
+          +$1,240.00
+        </span>
+        <ArrowUp
+          strokeWidth={2.5}
+          className="size-6 text-[var(--color-positive)] sm:size-7"
+          aria-hidden="true"
+        />
+      </div>
+      <p className="mt-2 text-[13px] text-muted-foreground">
+        Settled overnight: <span className="font-medium text-foreground">+$1,800</span>
+        <span className="mx-2 text-border">|</span>
+        Auto-drafted: <span className="font-medium text-foreground">-$560</span>
+      </p>
+    </div>
+  );
+}
+
+function ReceivablesRadar() {
+  const steps = ["Sent", "Approved", "Cleared", "Landed"];
+  const activeIndex = 2; // Cleared
+
+  return (
+    <div className="rounded-3xl border border-border bg-card p-5">
+      <div className="flex items-center gap-2">
+        <Receipt strokeWidth={1.5} className="size-4 text-muted-foreground" />
+        <p className="text-[13px] font-medium text-muted-foreground">Inbound receivables</p>
+      </div>
+      <p className="mt-3 text-[15px] leading-snug">
+        Invoice <span className="font-semibold">#402</span> ({money(4500)}) cleared client bank. Landing by{" "}
+        <span className="font-medium">2:00 PM</span> today.
+      </p>
+      <div className="mt-4 flex items-center gap-2" aria-label="Receivables progress">
+        {steps.map((label, i) => {
+          const isActive = i === activeIndex;
+          const isPast = i < activeIndex;
+          return (
+            <div key={label} className="flex-1">
+              <div
+                className={
+                  "h-2 rounded-full transition-all duration-300 " +
+                  (isActive
+                    ? "bg-[var(--color-positive)] shadow-[0_0_16px_color-mix(in_oklab,var(--color-positive)_55%,transparent)]"
+                    : isPast
+                      ? "bg-foreground/30"
+                      : "bg-border")
+                }
+              />
+              <p
+                className={
+                  "mt-1.5 text-[11px] font-medium " +
+                  (isActive ? "text-[var(--color-positive)]" : "text-muted-foreground")
+                }
+              >
+                {label}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function CapitalOptimizer() {
+  const [transferred, setTransferred] = useState(false);
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-border bg-card/70 p-5 backdrop-blur-xl">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(120%_120%_at_0%_0%,var(--color-positive)_0%,transparent_35%)] opacity-[0.08]" />
+      <div className="flex items-center gap-2">
+        <Wallet strokeWidth={1.5} className="size-4 text-muted-foreground" />
+        <p className="text-[13px] font-medium text-muted-foreground">Capital Optimization</p>
+      </div>
+      <p className="mt-3 text-[15px] leading-snug">
+        You have <span className="font-semibold">$15,000</span> in idle float this week.{" "}
+        {!transferred ? (
+          <>
+            <button
+              type="button"
+              onClick={() => setTransferred(true)}
+              className="inline-flex items-center gap-1 font-semibold text-primary hover:underline active:opacity-70"
+            >
+              1-Tap Transfer
+            </button>{" "}
+            to your high-yield sweep account to generate an estimated{" "}
+            <span className="font-semibold">$60</span> by Friday.
+          </>
+        ) : (
+          <span className="inline-flex items-center gap-1.5 font-semibold text-[var(--color-positive)]">
+            <CheckCircle2 strokeWidth={2} className="size-4" />
+            Transferred & Earning
+          </span>
+        )}
+      </p>
     </div>
   );
 }
