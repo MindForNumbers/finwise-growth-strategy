@@ -1,9 +1,9 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { ArrowRight, Info } from "lucide-react";
+import { ArrowRight, Check, Info } from "lucide-react";
 
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
-import { INDUSTRIES, SAMPLE, money, project } from "@/lib/finwise";
+import { INDUSTRIES, NORTH_STARS, SAMPLE, money, project, type NorthStar } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
 export const Route = createFileRoute("/drivers")({
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/drivers")({
 });
 
 function DriversScreen() {
-  const { overhead, setOverhead, industry } = useOnboarding();
+  const { overhead, setOverhead, industry, northStar, setNorthStar } = useOnboarding();
   const navigate = useNavigate();
   const breakEven = project(overhead, 0).breakEvenDaily;
 
@@ -88,6 +88,11 @@ function DriversScreen() {
         <button
           type="button"
           onClick={() => navigate({ to: "/runway" })}
+          className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-[15px] font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.99]"
+        >
+          Generate my 30-day runway
+          <ArrowRight strokeWidth={2} className="size-4" />
+        </button>
           className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-[15px] font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.99]"
         >
           Generate my 30-day runway
