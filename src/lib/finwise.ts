@@ -22,7 +22,14 @@ export type NorthStar = "growth" | "risk" | "capital";
 
 export const NORTH_STARS: Record<
   NorthStar,
-  { id: NorthStar; title: string; target: string; hint: string; focus: string }
+  {
+    id: NorthStar;
+    title: string;
+    target: string;
+    hint: string;
+    focus: string;
+    sidequests: { text: string; reward: string }[];
+  }
 > = {
   growth: {
     id: "growth",
@@ -30,6 +37,10 @@ export const NORTH_STARS: Record<
     target: "Target: +15% MRR",
     hint: "Optimize for reinvestment velocity",
     focus: "Growth focus: reinvest surplus cash toward the +15% MRR target.",
+    sidequests: [
+      { text: "Reallocate $2,000 to your top-performing revenue channel.", reward: "+3% MRR Momentum" },
+      { text: "Send a 1-tap upsell campaign to 10 existing customers.", reward: "Pipeline Boosted" },
+    ],
   },
   risk: {
     id: "risk",
@@ -37,6 +48,10 @@ export const NORTH_STARS: Record<
     target: "Target: 90-Day Cash Buffer",
     hint: "Protect a full quarter of runway",
     focus: "Risk focus: keep a full 90-day cash buffer intact before any new spend.",
+    sidequests: [
+      { text: "Send 1-tap automated reminder for Invoice #104 ($2,100).", reward: "+2 Days to Buffer" },
+      { text: "Categorize 3 pending software expenses.", reward: "Accuracy Unlocked" },
+    ],
   },
   capital: {
     id: "capital",
@@ -44,6 +59,10 @@ export const NORTH_STARS: Record<
     target: "Target: Free up $10k for hiring",
     hint: "Unlock headcount without new debt",
     focus: "Allocation focus: free up $10,000 of headroom for your next hire.",
+    sidequests: [
+      { text: "Delay 1 non-essential contractor payout by 7 days.", reward: "+$4,500 Headroom" },
+      { text: "Move $8,000 idle float to your high-yield sweep account.", reward: "Yield Activated" },
+    ],
   },
 };
 
