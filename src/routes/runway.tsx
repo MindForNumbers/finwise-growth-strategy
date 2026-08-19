@@ -13,7 +13,7 @@ import {
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
 import { RunwayChart } from "@/components/onboarding/runway-chart";
-import { INDUSTRIES, NORTH_STARS, SAMPLE, money, project, type Industry, type NorthStar } from "@/lib/finwise";
+import { INDUSTRIES, NORTH_STARS, SAMPLE, money, project, type Industry } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
 export const Route = createFileRoute("/runway")({
