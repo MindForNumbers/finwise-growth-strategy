@@ -18,6 +18,35 @@ export type Health = "healthy" | "at-risk" | "shortfall";
 
 export type Industry = "ecommerce" | "agency" | "services" | "default";
 
+export type NorthStar = "growth" | "risk" | "capital";
+
+export const NORTH_STARS: Record<
+  NorthStar,
+  { id: NorthStar; title: string; target: string; hint: string; focus: string }
+> = {
+  growth: {
+    id: "growth",
+    title: "Aggressive Growth",
+    target: "Target: +15% MRR",
+    hint: "Optimize for reinvestment velocity",
+    focus: "Growth focus: reinvest surplus cash toward the +15% MRR target.",
+  },
+  risk: {
+    id: "risk",
+    title: "Risk Reduction",
+    target: "Target: 90-Day Cash Buffer",
+    hint: "Protect a full quarter of runway",
+    focus: "Risk focus: keep a full 90-day cash buffer intact before any new spend.",
+  },
+  capital: {
+    id: "capital",
+    title: "Capital Allocation",
+    target: "Target: Free up $10k for hiring",
+    hint: "Unlock headcount without new debt",
+    focus: "Allocation focus: free up $10,000 of headroom for your next hire.",
+  },
+};
+
 export const INDUSTRIES: Record<
   Industry,
   {

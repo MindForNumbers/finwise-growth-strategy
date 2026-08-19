@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
-import { INDUSTRIES, type Industry } from "./finwise";
+import { INDUSTRIES, type Industry, type NorthStar } from "./finwise";
 
 interface OnboardingState {
   goal: string;
@@ -8,6 +8,8 @@ interface OnboardingState {
   setIndustry: (i: Industry) => void;
   overhead: number;
   setOverhead: (n: number) => void;
+  northStar: NorthStar | null;
+  setNorthStar: (n: NorthStar) => void;
   synced: boolean;
   setSynced: (b: boolean) => void;
   reset: () => void;
@@ -20,6 +22,7 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   const [industry, setIndustryState] = useState<Industry>("default");
   const [overhead, setOverhead] = useState(INDUSTRIES.default.overhead);
   const [synced, setSynced] = useState(false);
+  const [northStar, setNorthStar] = useState<NorthStar | null>(null);
 
   const setIndustry = (i: Industry) => {
     setIndustryState(i);
@@ -34,6 +37,8 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
       setIndustry,
       overhead,
       setOverhead,
+      northStar,
+      setNorthStar,
       synced,
       setSynced,
       reset: () => {
@@ -41,9 +46,10 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
         setIndustryState("default");
         setOverhead(INDUSTRIES.default.overhead);
         setSynced(false);
+        setNorthStar(null);
       },
     }),
-    [goal, industry, overhead, synced],
+    [goal, industry, overhead, synced, northStar],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
