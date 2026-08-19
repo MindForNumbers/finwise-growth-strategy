@@ -85,6 +85,50 @@ function DriversScreen() {
           </div>
         </div>
 
+        <section className="mt-8" aria-label="Quarterly north star">
+          <h2 className="text-[19px] font-semibold tracking-tight">
+            Select Your Quarterly North Star
+          </h2>
+          <p className="mt-1.5 text-[13px] text-muted-foreground">
+            Your dashboard adapts to this goal. You can change it any time.
+          </p>
+          <div className="mt-4 grid gap-3">
+            {(Object.keys(NORTH_STARS) as NorthStar[]).map((id) => {
+              const ns = NORTH_STARS[id];
+              const selected = northStar === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setNorthStar(id)}
+                  aria-pressed={selected}
+                  className={
+                    "flex items-center gap-3 rounded-2xl border p-4 text-left backdrop-blur-xl transition-all duration-200 active:scale-[0.99] " +
+                    (selected
+                      ? "border-primary bg-primary/[0.06] shadow-[0_0_0_3px_color-mix(in_oklab,var(--color-primary)_12%,transparent)]"
+                      : "border-border bg-card/70 hover:border-foreground/20 hover:bg-accent")
+                  }
+                >
+                  <span className="min-w-0">
+                    <span className="block text-[15px] font-medium">
+                      {ns.title}{" "}
+                      <span className="font-normal text-muted-foreground">({ns.target})</span>
+                    </span>
+                    <span className="mt-0.5 block text-[13px] text-muted-foreground">
+                      {ns.hint}
+                    </span>
+                  </span>
+                  {selected && (
+                    <span className="ml-auto flex size-5 shrink-0 items-center justify-center rounded-full bg-primary">
+                      <Check strokeWidth={2.5} className="size-3 text-primary-foreground" />
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
         <button
           type="button"
           onClick={() => navigate({ to: "/runway" })}
