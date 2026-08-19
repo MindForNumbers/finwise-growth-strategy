@@ -49,7 +49,7 @@ function RunwayScreen() {
 
   return (
     <div className="min-h-screen">
-      <ProgressRail step={3} back="/drivers" />
+      <ProgressRail step={4} back="/drivers" />
       <main className="mx-auto w-full max-w-3xl px-5 pb-20 pt-8 sm:pt-12">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
@@ -57,11 +57,6 @@ function RunwayScreen() {
             <h1 className="mt-1 text-[26px] font-semibold tracking-tight sm:text-3xl">
               Your cash runway
             </h1>
-            {northStar && (
-              <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[12px] font-medium text-primary">
-                North Star · {NORTH_STARS[northStar].title} — {NORTH_STARS[northStar].target}
-              </p>
-            )}
           </div>
           <span
             className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium ${tone.bg} ${tone.text}`}
@@ -74,6 +69,8 @@ function RunwayScreen() {
             {tone.label}
           </span>
         </div>
+
+        <GoalCascade />
 
         {/* Daily engagement layer */}
         <section className="mt-5 space-y-5" aria-label="Daily cash activity">
