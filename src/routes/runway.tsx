@@ -13,7 +13,7 @@ import {
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
 import { RunwayChart } from "@/components/onboarding/runway-chart";
-import { INDUSTRIES, SAMPLE, money, project, type Industry } from "@/lib/finwise";
+import { INDUSTRIES, NORTH_STARS, SAMPLE, money, project, type Industry } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
 export const Route = createFileRoute("/runway")({
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/runway")({
 });
 
 function RunwayScreen() {
-  const { overhead, reset, industry } = useOnboarding();
+  const { overhead, reset, industry, northStar } = useOnboarding();
   const [deltaPct, setDeltaPct] = useState(0);
   const p = project(overhead, deltaPct / 100);
 
@@ -57,6 +57,11 @@ function RunwayScreen() {
             <h1 className="mt-1 text-[26px] font-semibold tracking-tight sm:text-3xl">
               Your cash runway
             </h1>
+            {northStar && (
+              <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[12px] font-medium text-primary">
+                North Star · {NORTH_STARS[northStar].title} — {NORTH_STARS[northStar].target}
+              </p>
+            )}
           </div>
           <span
             className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium ${tone.bg} ${tone.text}`}
@@ -184,7 +189,10 @@ function RunwayScreen() {
             )}
             Insight
           </p>
-          <p className="mt-2 text-[16px] leading-relaxed">{insight(p, deltaPct, industry)}</p>
+          <p className="mt-2 text-[16px] leading-relaxed">
+            {insight(p, deltaPct, industry)}
+            {northStar ? ` ${NORTH_STARS[northStar].focus}` : ""}
+          </p>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-[13px]">
