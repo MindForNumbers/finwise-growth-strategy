@@ -217,10 +217,16 @@ function GoalCascade() {
   const [completed, setCompleted] = useState<boolean[]>(
     new Array(config.sidequests.length).fill(false),
   );
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     setCompleted(new Array(config.sidequests.length).fill(false));
   }, [active]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setProgress(70), 50);
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggle = (index: number) => {
     setCompleted((prev) => {
@@ -243,7 +249,7 @@ function GoalCascade() {
           <div className="h-2.5 w-full overflow-hidden rounded-full bg-accent">
             <div
               className="h-full rounded-full bg-primary transition-all duration-1000 ease-out"
-              style={{ width: "70%" }}
+              style={{ width: `${progress}%` }}
             />
           </div>
           <div className="mt-2 flex items-center justify-between text-[12px] text-muted-foreground">
