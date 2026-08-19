@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AlertTriangle,
   ArrowUp,
@@ -49,7 +49,7 @@ function RunwayScreen() {
 
   return (
     <div className="min-h-screen">
-      <ProgressRail step={3} back="/drivers" />
+      <ProgressRail step={4} back="/drivers" />
       <main className="mx-auto w-full max-w-3xl px-5 pb-20 pt-8 sm:pt-12">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
@@ -57,11 +57,6 @@ function RunwayScreen() {
             <h1 className="mt-1 text-[26px] font-semibold tracking-tight sm:text-3xl">
               Your cash runway
             </h1>
-            {northStar && (
-              <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[12px] font-medium text-primary">
-                North Star · {NORTH_STARS[northStar].title} — {NORTH_STARS[northStar].target}
-              </p>
-            )}
           </div>
           <span
             className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-medium ${tone.bg} ${tone.text}`}
@@ -74,6 +69,8 @@ function RunwayScreen() {
             {tone.label}
           </span>
         </div>
+
+        <GoalCascade />
 
         {/* Daily engagement layer */}
         <section className="mt-5 space-y-5" aria-label="Daily cash activity">
@@ -210,6 +207,103 @@ function RunwayScreen() {
         </div>
       </main>
     </div>
+  );
+}
+
+function GoalCascade() {
+  const { northStar } = useOnboarding();
+  const active = northStar ?? "risk";
+  const config = NORTH_STARS[active];
+  const [completed, setCompleted] = useState<boolean[]>(
+    new Array(config.sidequests.length).fill(false),
+  );
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    setCompleted(new Array(config.sidequests.length).fill(false));
+  }, [active]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setProgress(70), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const toggle = (index: number) => {
+    setCompleted((prev) => {
+      const next = [...prev];
+      next[index] = !next[index];
+      return next;
+    });
+  };
+
+  return (
+    <section className="mt-6 space-y-5" aria-label="Goal cascade">
+      <div className="rounded-3xl border border-border bg-card p-6">
+        <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+          🎯 Q3 North Star
+        </p>
+        <h2 className="mt-1 text-[22px] font-semibold tracking-tight">
+          {config.title} — {config.target}
+        </h2>
+        <div className="mt-5">
+          <div className="h-2.5 w-full overflow-hidden rounded-full bg-accent">
+            <div
+              className="h-full rounded-full bg-primary transition-all duration-1000 ease-out"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <div className="mt-2 flex items-center justify-between text-[12px] text-muted-foreground">
+            <span className="font-medium text-foreground">70% complete</span>
+            <span>{config.hint}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-3xl border border-border bg-card p-6">
+        <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+          ⚡ Today&apos;s Recommended Sidequests
+        </p>
+        <ul className="mt-4 space-y-2">
+          {config.sidequests.map((quest, i) => {
+            const isDone = completed[i];
+            return (
+              <li key={i}>
+                <button
+                  type="button"
+                  onClick={() => toggle(i)}
+                  className="group flex w-full items-start gap-4 rounded-2xl p-3 text-left transition-colors hover:bg-accent/50"
+                >
+                  <span
+                    className={
+                      "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border transition-all duration-200 " +
+                      (isDone
+                        ? "border-primary bg-primary text-primary-foreground scale-110"
+                        : "border-border bg-transparent text-transparent group-hover:border-primary/50")
+                    }
+                    aria-hidden="true"
+                  >
+                    <CheckCircle2 className="size-4" />
+                  </span>
+                  <span className="flex-1">
+                    <span
+                      className={
+                        "block text-[15px] leading-snug transition-colors " +
+                        (isDone ? "text-muted-foreground line-through" : "text-foreground")
+                      }
+                    >
+                      {quest.text}
+                    </span>
+                    <span className="mt-1 block text-[12px] font-medium text-primary">
+                      {isDone ? "Completed ✓" : `Reward: ${quest.reward}`}
+                    </span>
+                  </span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
   );
 }
 
