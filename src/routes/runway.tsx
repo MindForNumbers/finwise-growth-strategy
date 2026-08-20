@@ -235,10 +235,13 @@ function GoalCascade() {
   }, [completedCount, targetProgress]);
 
 
-  const toggle = (index: number) => {
-    console.log("toggle called", active, index);
-    toggleSidequest(active, index);
-  };
+  const toggle = useCallback(
+    (index: number) => {
+      toggleSidequest(active, index);
+    },
+    [active, toggleSidequest],
+  );
+
 
 
   return (
