@@ -291,8 +291,10 @@ function GoalCascade() {
                   <button
                     type="button"
                     onClick={() => toggle(i)}
+                    onPointerDown={() => toggle(i)}
                     className="group flex w-full items-start gap-4 rounded-2xl p-3 text-left transition-colors hover:bg-accent/50"
                   >
+
                     <span
                       className={
                         "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 " +
