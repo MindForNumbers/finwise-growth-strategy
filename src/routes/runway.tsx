@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import {
   AlertTriangle,
   ArrowUp,
+  Check,
   CheckCircle2,
   Receipt,
   RotateCcw,
   TrendingDown,
   Wallet,
 } from "lucide-react";
+
 
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
