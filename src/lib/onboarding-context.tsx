@@ -1,6 +1,12 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import { INDUSTRIES, type Industry, type NorthStar } from "./finwise";
 
+const DEFAULT_SIDEQUESTS: Record<NorthStar, boolean[]> = {
+  growth: [false, false],
+  risk: [false, false],
+  capital: [false, false],
+};
+
 interface OnboardingState {
   goal: string;
   setGoal: (g: string) => void;
@@ -12,6 +18,8 @@ interface OnboardingState {
   setNorthStar: (n: NorthStar) => void;
   synced: boolean;
   setSynced: (b: boolean) => void;
+  completedSidequests: Record<NorthStar, boolean[]>;
+  toggleSidequest: (ns: NorthStar, index: number) => void;
   reset: () => void;
 }
 
@@ -23,10 +31,20 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   const [overhead, setOverhead] = useState(INDUSTRIES.default.overhead);
   const [synced, setSynced] = useState(false);
   const [northStar, setNorthStar] = useState<NorthStar | null>(null);
+  const [completedSidequests, setCompletedSidequests] =
+    useState<Record<NorthStar, boolean[]>>(DEFAULT_SIDEQUESTS);
 
   const setIndustry = (i: Industry) => {
     setIndustryState(i);
     setOverhead(INDUSTRIES[i].overhead);
+  };
+
+  const toggleSidequest = (ns: NorthStar, index: number) => {
+    setCompletedSidequests((prev) => {
+      const next = { ...prev, [ns]: [...prev[ns]] };
+      next[ns][index] = !next[ns][index];
+      return next;
+    });
   };
 
   const value = useMemo(
@@ -41,15 +59,18 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
       setNorthStar,
       synced,
       setSynced,
+      completedSidequests,
+      toggleSidequest,
       reset: () => {
         setGoal("cashflow");
         setIndustryState("default");
         setOverhead(INDUSTRIES.default.overhead);
         setSynced(false);
         setNorthStar(null);
+        setCompletedSidequests(DEFAULT_SIDEQUESTS);
       },
     }),
-    [goal, industry, overhead, synced, northStar],
+    [goal, industry, overhead, synced, northStar, completedSidequests],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

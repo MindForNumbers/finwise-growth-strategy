@@ -1,14 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   AlertTriangle,
   ArrowUp,
+  Check,
   CheckCircle2,
   Receipt,
   RotateCcw,
   TrendingDown,
   Wallet,
 } from "lucide-react";
+
 
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
@@ -211,30 +213,36 @@ function RunwayScreen() {
 }
 
 function GoalCascade() {
-  const { northStar } = useOnboarding();
+  const { northStar, completedSidequests, toggleSidequest } = useOnboarding();
   const active = northStar ?? "risk";
   const config = NORTH_STARS[active];
-  const [completed, setCompleted] = useState<boolean[]>(
-    new Array(config.sidequests.length).fill(false),
+  const completed = completedSidequests[active];
+  const [progress, setProgress] = useState(70);
+  const [pulse, setPulse] = useState(false);
+
+  const completedCount = completed.filter(Boolean).length;
+  const allDone = completedCount === config.sidequests.length;
+  const targetProgress = 70 + completedCount * 5;
+
+  useEffect(() => {
+    setProgress(targetProgress);
+    if (completedCount > 0) {
+      setPulse(true);
+      const timer = setTimeout(() => setPulse(false), 700);
+      return () => clearTimeout(timer);
+    }
+    return undefined;
+  }, [completedCount, targetProgress]);
+
+
+  const toggle = useCallback(
+    (index: number) => {
+      toggleSidequest(active, index);
+    },
+    [active, toggleSidequest],
   );
-  const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    setCompleted(new Array(config.sidequests.length).fill(false));
-  }, [active]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(70), 50);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const toggle = (index: number) => {
-    setCompleted((prev) => {
-      const next = [...prev];
-      next[index] = !next[index];
-      return next;
-    });
-  };
 
   return (
     <section className="mt-6 space-y-5" aria-label="Goal cascade">
@@ -246,66 +254,139 @@ function GoalCascade() {
           {config.title} — {config.target}
         </h2>
         <div className="mt-5">
-          <div className="h-2.5 w-full overflow-hidden rounded-full bg-accent">
+          <div
+            className={
+              "h-2.5 w-full overflow-hidden rounded-full bg-accent transition-shadow duration-300 " +
+              (pulse ? "shadow-[0_0_24px_color-mix(in_oklab,var(--color-positive)_55%,transparent)]" : "")
+            }
+          >
             <div
-              className="h-full rounded-full bg-primary transition-all duration-1000 ease-out"
+              className="h-full rounded-full bg-primary transition-all duration-700 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
           <div className="mt-2 flex items-center justify-between text-[12px] text-muted-foreground">
-            <span className="font-medium text-foreground">70% complete</span>
+            <span className="font-medium text-foreground">{progress}% complete</span>
             <span>{config.hint}</span>
           </div>
         </div>
       </div>
 
-      <div className="rounded-3xl border border-border bg-card p-6">
-        <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
-          ⚡ Today&apos;s Recommended Sidequests
-        </p>
-        <ul className="mt-4 space-y-2">
-          {config.sidequests.map((quest, i) => {
-            const isDone = completed[i];
-            return (
-              <li key={i}>
-                <button
-                  type="button"
-                  onClick={() => toggle(i)}
-                  className="group flex w-full items-start gap-4 rounded-2xl p-3 text-left transition-colors hover:bg-accent/50"
-                >
-                  <span
-                    className={
-                      "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border transition-all duration-200 " +
-                      (isDone
-                        ? "border-primary bg-primary text-primary-foreground scale-110"
-                        : "border-border bg-transparent text-transparent group-hover:border-primary/50")
-                    }
-                    aria-hidden="true"
-                  >
-                    <CheckCircle2 className="size-4" />
-                  </span>
-                  <span className="flex-1">
-                    <span
-                      className={
-                        "block text-[15px] leading-snug transition-colors " +
-                        (isDone ? "text-muted-foreground line-through" : "text-foreground")
-                      }
-                    >
-                      {quest.text}
-                    </span>
-                    <span className="mt-1 block text-[12px] font-medium text-primary">
-                      {isDone ? "Completed ✓" : `Reward: ${quest.reward}`}
-                    </span>
-                  </span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+      <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6">
+        <div
+          className={
+            "transition-all duration-500 " +
+            (allDone ? "pointer-events-none opacity-0" : "opacity-100")
+          }
+          aria-hidden={allDone}
+        >
+          <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+            ⚡ Today&apos;s Recommended Sidequests
+          </p>
+          <ul className="mt-4 space-y-2">
+            {config.sidequests.map((quest, i) => {
+              const isDone = completed[i] ?? false;
+              return (
+                <li key={quest.text}>
+                  <SidequestButton
+                    index={i}
+                    isDone={isDone}
+                    quest={quest}
+                    onToggle={toggle}
+                  />
+                </li>
+              );
+            })}
+
+          </ul>
+
+
+
+        </div>
+
+        <div
+          className={
+            "absolute inset-0 flex items-center justify-center p-6 transition-all duration-500 " +
+            (allDone ? "opacity-100" : "pointer-events-none opacity-0")
+          }
+          aria-hidden={!allDone}
+        >
+          <div className="text-center">
+            <p className="text-[28px] leading-none">🎉</p>
+            <p className="mt-3 text-[17px] font-semibold tracking-tight text-foreground">
+              All daily tasks complete.
+            </p>
+            <p className="mt-1 text-[13px] text-muted-foreground">
+              Your cash buffer is optimized for today.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
+function SidequestButton({
+  index,
+  isDone,
+  quest,
+  onToggle,
+}: {
+  index: number;
+  isDone: boolean;
+  quest: { text: string; reward: string };
+  onToggle: (index: number) => void;
+}) {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const handler = () => onToggle(index);
+    el.addEventListener("click", handler);
+    return () => el.removeEventListener("click", handler);
+  }, [index, onToggle]);
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className="group flex w-full items-start gap-4 rounded-2xl p-3 text-left transition-colors hover:bg-accent/50"
+    >
+      <span
+        className={
+          "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 " +
+          (isDone
+            ? "scale-110 border-[var(--color-positive)] bg-[var(--color-positive)] text-white shadow-[0_0_14px_color-mix(in_oklab,var(--color-positive)_50%,transparent)]"
+            : "border-border bg-transparent text-transparent group-hover:border-[var(--color-positive)]/50")
+        }
+        aria-hidden="true"
+      >
+        <Check strokeWidth={2.5} className="size-4" />
+      </span>
+      <span className="flex-1">
+        <span
+          className={
+            "block text-[15px] leading-snug transition-all duration-300 " +
+            (isDone ? "text-muted-foreground line-through" : "text-foreground")
+          }
+        >
+          {quest.text}
+        </span>
+        <span
+          className={
+            "mt-1 block text-[12px] font-medium transition-colors duration-300 " +
+            (isDone ? "text-[var(--color-positive)]" : "text-primary")
+          }
+        >
+          {isDone ? "Completed ✓" : `Reward: ${quest.reward}`}
+        </span>
+      </span>
+    </button>
+  );
+}
+
+
 
 function VelocityTicker() {
   return (
