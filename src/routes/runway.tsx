@@ -303,9 +303,67 @@ function GoalCascade() {
 
         </div>
 
-        <div
+function SidequestButton({
+  index,
+  isDone,
+  quest,
+  onToggle,
+}: {
+  index: number;
+  isDone: boolean;
+  quest: { text: string; reward: string };
+  onToggle: (index: number) => void;
+}) {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const handler = () => onToggle(index);
+    el.addEventListener("click", handler);
+    return () => el.removeEventListener("click", handler);
+  }, [index, onToggle]);
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      className="group flex w-full items-start gap-4 rounded-2xl p-3 text-left transition-colors hover:bg-accent/50"
+    >
+      <span
+        className={
+          "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 " +
+          (isDone
+            ? "scale-110 border-[var(--color-positive)] bg-[var(--color-positive)] text-white shadow-[0_0_14px_color-mix(in_oklab,var(--color-positive)_50%,transparent)]"
+            : "border-border bg-transparent text-transparent group-hover:border-[var(--color-positive)]/50")
+        }
+        aria-hidden="true"
+      >
+        <Check strokeWidth={2.5} className="size-4" />
+      </span>
+      <span className="flex-1">
+        <span
           className={
-            "absolute inset-0 flex items-center justify-center p-6 transition-all duration-500 " +
+            "block text-[15px] leading-snug transition-all duration-300 " +
+            (isDone ? "text-muted-foreground line-through" : "text-foreground")
+          }
+        >
+          {quest.text}
+        </span>
+        <span
+          className={
+            "mt-1 block text-[12px] font-medium transition-colors duration-300 " +
+            (isDone ? "text-[var(--color-positive)]" : "text-primary")
+          }
+        >
+          {isDone ? "Completed ✓" : `Reward: ${quest.reward}`}
+        </span>
+      </span>
+    </button>
+  );
+}
+
+
             (allDone ? "opacity-100" : "pointer-events-none opacity-0")
           }
           aria-hidden={!allDone}
