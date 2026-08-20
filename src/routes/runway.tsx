@@ -284,13 +284,13 @@ function GoalCascade() {
             ⚡ Today&apos;s Recommended Sidequests
           </p>
           <ul className="mt-4 space-y-2">
-            {config.sidequests.map((quest) => {
-              const isDone = completed[quest.index];
+            {config.sidequests.map((quest, i) => {
+              const isDone = completed[i];
               return (
                 <li key={quest.text}>
                   <button
                     type="button"
-                    onClick={() => toggle(quest.index)}
+                    onClick={() => toggle(i)}
                     className="group flex w-full items-start gap-4 rounded-2xl p-3 text-left transition-colors hover:bg-accent/50"
                   >
                     <span
@@ -327,6 +327,7 @@ function GoalCascade() {
               );
             })}
           </ul>
+
 
         </div>
 
