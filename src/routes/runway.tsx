@@ -231,7 +231,9 @@ function GoalCascade() {
       const timer = setTimeout(() => setPulse(false), 700);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [completedCount, targetProgress]);
+
 
   const toggle = (index: number) => {
     toggleSidequest(active, index);
