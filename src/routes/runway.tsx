@@ -285,7 +285,7 @@ function GoalCascade() {
           </p>
           <ul className="mt-4 space-y-2">
             {config.sidequests.map((quest, i) => {
-              const isDone = completed[i];
+              const isDone = completed[i] ?? false;
               return (
                 <li key={quest.text}>
                   <SidequestButton
@@ -297,6 +297,7 @@ function GoalCascade() {
                 </li>
               );
             })}
+
           </ul>
 
 
