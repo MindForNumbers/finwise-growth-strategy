@@ -303,6 +303,28 @@ function GoalCascade() {
 
         </div>
 
+        <div
+          className={
+            "absolute inset-0 flex items-center justify-center p-6 transition-all duration-500 " +
+            (allDone ? "opacity-100" : "pointer-events-none opacity-0")
+          }
+          aria-hidden={!allDone}
+        >
+          <div className="text-center">
+            <p className="text-[28px] leading-none">🎉</p>
+            <p className="mt-3 text-[17px] font-semibold tracking-tight text-foreground">
+              All daily tasks complete.
+            </p>
+            <p className="mt-1 text-[13px] text-muted-foreground">
+              Your cash buffer is optimized for today.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SidequestButton({
   index,
   isDone,
@@ -363,25 +385,6 @@ function SidequestButton({
   );
 }
 
-
-            (allDone ? "opacity-100" : "pointer-events-none opacity-0")
-          }
-          aria-hidden={!allDone}
-        >
-          <div className="text-center">
-            <p className="text-[28px] leading-none">🎉</p>
-            <p className="mt-3 text-[17px] font-semibold tracking-tight text-foreground">
-              All daily tasks complete.
-            </p>
-            <p className="mt-1 text-[13px] text-muted-foreground">
-              Your cash buffer is optimized for today.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 
 function VelocityTicker() {
