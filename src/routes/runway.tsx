@@ -288,47 +288,17 @@ function GoalCascade() {
               const isDone = completed[i];
               return (
                 <li key={quest.text}>
-                  <button
-                    type="button"
-                    onClick={() => toggle(i)}
-                    onPointerDown={() => toggle(i)}
-                    className="group flex w-full items-start gap-4 rounded-2xl p-3 text-left transition-colors hover:bg-accent/50"
-                  >
-
-                    <span
-                      className={
-                        "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 " +
-                        (isDone
-                          ? "scale-110 border-[var(--color-positive)] bg-[var(--color-positive)] text-white shadow-[0_0_14px_color-mix(in_oklab,var(--color-positive)_50%,transparent)]"
-                          : "border-border bg-transparent text-transparent group-hover:border-[var(--color-positive)]/50")
-                      }
-                      aria-hidden="true"
-                    >
-                      <Check strokeWidth={2.5} className="size-4" />
-                    </span>
-                    <span className="flex-1">
-                      <span
-                        className={
-                          "block text-[15px] leading-snug transition-all duration-300 " +
-                          (isDone ? "text-muted-foreground line-through" : "text-foreground")
-                        }
-                      >
-                        {quest.text}
-                      </span>
-                      <span
-                        className={
-                          "mt-1 block text-[12px] font-medium transition-colors duration-300 " +
-                          (isDone ? "text-[var(--color-positive)]" : "text-primary")
-                        }
-                      >
-                        {isDone ? "Completed ✓" : `Reward: ${quest.reward}`}
-                      </span>
-                    </span>
-                  </button>
+                  <SidequestButton
+                    index={i}
+                    isDone={isDone}
+                    quest={quest}
+                    onToggle={toggle}
+                  />
                 </li>
               );
             })}
           </ul>
+
 
 
         </div>
