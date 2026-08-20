@@ -236,8 +236,10 @@ function GoalCascade() {
 
 
   const toggle = (index: number) => {
+    console.log("toggle called", active, index);
     toggleSidequest(active, index);
   };
+
 
   return (
     <section className="mt-6 space-y-5" aria-label="Goal cascade">
