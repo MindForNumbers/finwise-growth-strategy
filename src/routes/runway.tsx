@@ -500,11 +500,26 @@ function EngineCalibration() {
   const [resolved, setResolved] = useState([false, false]);
   const [displayedConfidence, setDisplayedConfidence] = useState(72);
   const [pulse, setPulse] = useState(false);
+  const confidenceRef = useRef(72);
 
   const targetConfidence = 72 + (resolved[0] ? 2 : 0);
 
   useEffect(() => {
-    setDisplayedConfidence(targetConfidence);
+    const start = confidenceRef.current;
+    const end = targetConfidence;
+    if (start === end) return;
+    const duration = 700;
+    const startTime = performance.now();
+    let raf = 0;
+    const animate = (now: number) => {
+      const t = Math.min((now - startTime) / duration, 1);
+      const val = Math.round(start + (end - start) * t);
+      confidenceRef.current = val;
+      setDisplayedConfidence(val);
+      if (t < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
   }, [targetConfidence]);
 
   const resolve = (index: number) => {
