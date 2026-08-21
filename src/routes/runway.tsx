@@ -83,6 +83,8 @@ function RunwayScreen() {
           </div>
         </section>
 
+        <EngineCalibration />
+
         <div className="my-6 h-px bg-border" />
 
         <div className="rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.4)]">
@@ -491,6 +493,163 @@ function CapitalOptimizer() {
         </button>
       )}
     </div>
+  );
+}
+
+function EngineCalibration() {
+  const [resolved, setResolved] = useState([false, false]);
+  const [displayedConfidence, setDisplayedConfidence] = useState(72);
+  const [pulse, setPulse] = useState(false);
+  const confidenceRef = useRef(72);
+
+  const targetConfidence = 72 + (resolved[0] ? 2 : 0);
+
+  useEffect(() => {
+    const start = confidenceRef.current;
+    const end = targetConfidence;
+    if (start === end) return;
+    const duration = 700;
+    const startTime = performance.now();
+    let raf = 0;
+    const animate = (now: number) => {
+      const t = Math.min((now - startTime) / duration, 1);
+      const val = Math.round(start + (end - start) * t);
+      confidenceRef.current = val;
+      setDisplayedConfidence(val);
+      if (t < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [targetConfidence]);
+
+  const resolve = (index: number) => {
+    if (resolved[index]) return;
+    const next = [...resolved];
+    next[index] = true;
+    setResolved(next);
+    setPulse(true);
+    setTimeout(() => setPulse(false), 700);
+  };
+
+  const actions = [
+    {
+      title: "Revenue Leakage: 3 Duplicate Software Subscriptions Detected.",
+      impact: "Resolution reclaims $1,440 annualized and improves Predictive Confidence by +2%.",
+      button: "[Execute Cancellation]",
+    },
+    {
+      title: "Trapped Capital: Invoice #104 ($2,100) is 5 days in arrears.",
+      impact: "Accelerating collection improves 30-day liquidity buffer.",
+      button: "[Deploy Automated Reminder]",
+    },
+  ];
+
+  return (
+    <section className="mt-5 rounded-3xl border border-border bg-card p-6" aria-label="Forecasting engine calibration">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-[22px] font-semibold tracking-tight">⚙️ Forecasting Engine Calibration</h2>
+          <p className="mt-1 text-[13px] text-muted-foreground">
+            Predictive Confidence —{" "}
+            <span className="font-medium text-foreground">{displayedConfidence}%</span>
+          </p>
+        </div>
+        <div className="w-full sm:w-1/2">
+          <div
+            className={
+              "h-2.5 w-full overflow-hidden rounded-full bg-accent transition-shadow duration-300 " +
+              (pulse ? "shadow-[0_0_24px_color-mix(in_oklab,var(--color-primary)_55%,transparent)]" : "")
+            }
+          >
+            <div
+              className="h-full rounded-full bg-primary transition-all duration-700 ease-out"
+              style={{ width: `${displayedConfidence}%` }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-7 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="flex gap-5">
+          <div className="flex flex-col items-center pt-1">
+            <div className="size-2.5 rounded-full bg-foreground/30" />
+            <div className="w-px flex-1 bg-border" />
+            <div className="relative flex items-center justify-center">
+              <div className="size-3.5 rounded-full bg-primary" />
+              <div className="absolute inset-0 -m-1.5 rounded-full bg-primary/20" />
+            </div>
+            <div className="w-px flex-1 bg-border" />
+            <div className="size-2.5 rounded-full border border-border bg-transparent" />
+          </div>
+
+          <div className="flex-1 space-y-8">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Phase 1</p>
+              <p className="text-[15px] font-medium text-muted-foreground">Data Ingestion — Complete</p>
+            </div>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">Active</p>
+              <h3 className="mt-0.5 text-[17px] font-semibold tracking-tight">Phase 2: Liquidity Optimization</h3>
+              <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">
+                Engine has identified capital inefficiencies. Resolution required to maintain 90-day forecast integrity.
+              </p>
+            </div>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">Phase 3</p>
+              <p className="text-[15px] font-medium text-muted-foreground">Forecast Lock — Pending</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-accent/50 p-5">
+          <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+            ⚡ Actionable Inefficiencies (2 Identified)
+          </p>
+          <ul className="mt-4 space-y-4">
+            {actions.map((action, i) => {
+              const isResolved = resolved[i];
+              return (
+                <li key={i} className="flex items-start gap-3">
+                  <button
+                    type="button"
+                    onClick={() => resolve(i)}
+                    className={
+                      "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-sm border transition-all duration-300 " +
+                      (isResolved
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border bg-transparent text-transparent hover:border-primary/50")
+                    }
+                    aria-label={isResolved ? "Resolved" : "Resolve inefficiency"}
+                  >
+                    <Check strokeWidth={2.5} className="size-4" />
+                  </button>
+                  <div className={isResolved ? "opacity-50 transition-opacity duration-300" : "transition-opacity duration-300"}>
+                    <p
+                      className={
+                        "text-[15px] leading-snug transition-all duration-300 " +
+                        (isResolved ? "text-foreground line-through" : "text-foreground")
+                      }
+                    >
+                      {action.title}
+                    </p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{action.impact}</p>
+                    {!isResolved && (
+                      <button
+                        type="button"
+                        onClick={() => resolve(i)}
+                        className="mt-2 inline-flex items-center rounded-md px-2 py-1 text-[13px] font-medium text-primary transition-colors hover:bg-primary/10"
+                      >
+                        {action.button}
+                      </button>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 }
 
