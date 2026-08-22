@@ -316,7 +316,7 @@ function GoalCascade() {
           <div className="text-center">
             <p className="text-[28px] leading-none">🎉</p>
             <p className="mt-3 text-[17px] font-semibold tracking-tight text-foreground">
-              All daily tasks complete.
+              All maneuvers executed for today.
             </p>
             <p className="mt-1 text-[13px] text-muted-foreground">
               Your cash buffer is optimized for today.
