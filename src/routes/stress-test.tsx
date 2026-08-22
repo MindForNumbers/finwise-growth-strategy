@@ -5,6 +5,7 @@ import { AlertTriangle, RotateCcw, ShieldCheck, Waves } from "lucide-react";
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
 import { RunwayChart } from "@/components/onboarding/runway-chart";
+import { ModelInfoPopover } from "@/components/onboarding/model-info";
 import { INDUSTRIES, SAMPLE, money, project } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
