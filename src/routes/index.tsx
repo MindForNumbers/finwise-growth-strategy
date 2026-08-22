@@ -204,7 +204,7 @@ function WorkspaceSkeleton({ visible, label }: { visible: boolean; label: string
             <div key={i} className="h-24 rounded-2xl border border-border bg-card" />
           ))}
         </div>
-        <div className="mt-3 h-64 rounded-3xl border border-border bg-card p-6">
+        <div className="mt-3 h-64 rounded-3xl surface-card p-6">
           <div className="h-4 w-40 rounded-full bg-muted" />
           <div className="mt-6 h-40 rounded-2xl bg-gradient-to-t from-primary/15 to-transparent" />
         </div>

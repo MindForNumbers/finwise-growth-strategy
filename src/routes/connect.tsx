@@ -97,7 +97,7 @@ function ConnectScreen() {
                   key={o.label}
                   type="button"
                   onClick={start}
-                  className="flex w-full items-center gap-4 rounded-2xl border border-border bg-card p-5 text-left opacity-70 transition-all hover:opacity-100"
+                  className="flex w-full items-center gap-4 rounded-2xl surface-card p-5 text-left opacity-70 transition-all hover:opacity-100"
                 >
                   <Icon strokeWidth={1.5} className="size-6 shrink-0 text-muted-foreground" />
                   <span>
@@ -114,7 +114,7 @@ function ConnectScreen() {
             </p>
           </div>
         ) : (
-          <div className="mt-8 rounded-3xl border border-border/70 bg-card/70 p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.3)] backdrop-blur-2xl">
+          <div className="mt-8 rounded-3xl surface-glass p-6 backdrop-blur-2xl">
             <div className="flex items-baseline justify-between">
               <p className="text-[15px] font-medium">
                 {progress >= 1 ? "Sync complete" : config.syncLine}

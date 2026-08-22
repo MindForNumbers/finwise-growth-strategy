@@ -41,7 +41,7 @@ function DriversScreen() {
           We estimated your overhead from the imported ledger. Nudge it if it looks off.
         </p>
 
-        <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.4)] sm:p-8">
+        <div className="mt-8 rounded-3xl surface-card p-6 sm:p-8">
           <div className="flex items-baseline justify-between">
             <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
               Estimated monthly overhead
