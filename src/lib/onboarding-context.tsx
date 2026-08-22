@@ -1,11 +1,12 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
-import { INDUSTRIES, type Industry, type NorthStar } from "./finwise";
+import { INDUSTRIES, NORTH_STARS, type Industry, type NorthStar } from "./finwise";
 
-const DEFAULT_SIDEQUESTS: Record<NorthStar, boolean[]> = {
-  growth: [false, false],
-  risk: [false, false],
-  capital: [false, false],
-};
+const makeDefaultSidequests = (): Record<NorthStar, boolean[]> => ({
+  growth: NORTH_STARS.growth.sidequests.map(() => false),
+  risk: NORTH_STARS.risk.sidequests.map(() => false),
+  capital: NORTH_STARS.capital.sidequests.map(() => false),
+});
+
 
 interface OnboardingState {
   goal: string;
