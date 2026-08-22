@@ -222,9 +222,11 @@ function GoalCascade() {
   const [progress, setProgress] = useState(70);
   const [pulse, setPulse] = useState(false);
 
+  const total = config.sidequests.length;
   const completedCount = completed.filter(Boolean).length;
-  const allDone = completedCount === config.sidequests.length;
-  const targetProgress = 70 + completedCount * 5;
+  const allDone = completedCount === total;
+  const targetProgress = 70 + Math.round((completedCount / total) * 30);
+
 
   useEffect(() => {
     setProgress(targetProgress);
