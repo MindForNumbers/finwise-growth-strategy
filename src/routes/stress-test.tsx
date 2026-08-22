@@ -221,7 +221,7 @@ function StressTestScreen() {
             {monthlyDelta === 0
               ? `System Impact: Holding a ${cogs}% COGS target and ${labor}% labor ratio keeps monthly liquidity flat at baseline.`
               : monthlyDelta > 0
-                ? `System Impact: Hitting a ${cogs}% COGS target and ${labor}% labor ratio recovers ${money(monthlyDelta)} in monthly liquidity, extending the Zero Cash Date by ${Math.abs(dayShift)} days.`
+                ? `System Impact: Hitting a ${cogs}% COGS target and ${labor}% labor ratio recovers ${money(monthlyDelta)} in monthly liquidity, ${dayShift === 0 ? "holding the Zero Cash Date beyond the 90-day horizon" : `extending the Zero Cash Date by  days`}.`
                 : `System Impact: Running a ${cogs}% COGS target and ${labor}% labor ratio consumes ${money(Math.abs(monthlyDelta))} in monthly liquidity, pulling the Zero Cash Date forward by ${Math.abs(dayShift)} days.`}
           </p>
           <p className="mt-2 text-[13px] text-muted-foreground tabular-nums">
