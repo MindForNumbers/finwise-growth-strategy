@@ -283,7 +283,7 @@ function GoalCascade() {
           aria-hidden={allDone}
         >
           <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
-            ⚡ Today&apos;s Recommended Sidequests
+            ⚡ Today&apos;s Recommended Maneuvers
           </p>
           <ul className="mt-4 space-y-2">
             {config.sidequests.map((quest, i) => {
@@ -316,7 +316,7 @@ function GoalCascade() {
           <div className="text-center">
             <p className="text-[28px] leading-none">🎉</p>
             <p className="mt-3 text-[17px] font-semibold tracking-tight text-foreground">
-              All daily tasks complete.
+              All maneuvers executed for today.
             </p>
             <p className="mt-1 text-[13px] text-muted-foreground">
               Your cash buffer is optimized for today.
@@ -381,7 +381,7 @@ function SidequestButton({
             (isDone ? "text-[var(--color-positive)]" : "text-primary")
           }
         >
-          {isDone ? "Completed ✓" : `Reward: ${quest.reward}`}
+          {isDone ? "Executed ✓" : `Projected impact: ${quest.reward}`}
         </span>
       </span>
     </button>
