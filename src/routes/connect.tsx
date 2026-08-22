@@ -74,7 +74,7 @@ function ConnectScreen() {
             <button
               type="button"
               onClick={start}
-              className="group flex w-full items-center gap-4 rounded-2xl border border-primary bg-primary p-5 text-left text-primary-foreground transition-all hover:opacity-95 active:scale-[0.99]"
+              className="group flex w-full items-center gap-4 rounded-2xl btn-premium p-5 text-left"
             >
               <Sparkles strokeWidth={1.5} className="size-6 shrink-0" />
               <span>

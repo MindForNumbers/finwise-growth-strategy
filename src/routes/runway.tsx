@@ -130,7 +130,7 @@ function RunwayScreen() {
 
           <Link
             to="/stress-test"
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-[16px] font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_var(--color-primary)] transition-transform hover:brightness-105 active:scale-[0.985]"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl btn-premium px-6 py-4 text-[16px] font-semibold"
           >
             Enable Weekly Stress Test 🛡️
           </Link>
@@ -495,7 +495,7 @@ function CapitalOptimizer() {
         <button
           type="button"
           onClick={() => setTransferred(true)}
-          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2 text-[13px] font-semibold text-primary-foreground shadow-[0_8px_20px_-12px_var(--color-primary)] transition-transform hover:brightness-105 active:scale-[0.985]"
+          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full btn-premium px-4 py-2 text-[13px] font-semibold"
         >
           1-Tap Transfer
         </button>
