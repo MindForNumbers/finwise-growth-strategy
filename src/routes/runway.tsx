@@ -381,7 +381,7 @@ function SidequestButton({
             (isDone ? "text-[var(--color-positive)]" : "text-primary")
           }
         >
-          {isDone ? "Completed ✓" : `Reward: ${quest.reward}`}
+          {isDone ? "Executed ✓" : `Projected impact: ${quest.reward}`}
         </span>
       </span>
     </button>
