@@ -284,10 +284,16 @@ function GoalCascade() {
           }
           aria-hidden={allDone}
         >
-          <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
-            ⚡ Today&apos;s Priority Actions
-          </p>
+          <div className="flex items-baseline justify-between">
+            <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
+              ⚡ Today&apos;s Priority Actions
+            </p>
+            <p className="text-[12px] text-muted-foreground">
+              {completedCount} of {total} completed
+            </p>
+          </div>
           <ul className="mt-4 space-y-2">
+
             {config.sidequests.map((quest, i) => {
               const isDone = completed[i] ?? false;
               return (
