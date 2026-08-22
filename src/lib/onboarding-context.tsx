@@ -33,7 +33,7 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
   const [synced, setSynced] = useState(false);
   const [northStar, setNorthStar] = useState<NorthStar | null>(null);
   const [completedSidequests, setCompletedSidequests] =
-    useState<Record<NorthStar, boolean[]>>(DEFAULT_SIDEQUESTS);
+    useState<Record<NorthStar, boolean[]>>(makeDefaultSidequests);
 
   const setIndustry = (i: Industry) => {
     setIndustryState(i);
@@ -68,7 +68,7 @@ export function OnboardingProvider({ children }: { children: ReactNode }) {
         setOverhead(INDUSTRIES.default.overhead);
         setSynced(false);
         setNorthStar(null);
-        setCompletedSidequests(DEFAULT_SIDEQUESTS);
+        setCompletedSidequests(makeDefaultSidequests());
       },
     }),
     [goal, industry, overhead, synced, northStar, completedSidequests],
