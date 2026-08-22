@@ -61,7 +61,7 @@ function ConnectScreen() {
     <div className="min-h-screen">
       <ProgressRail step={1} back="/" />
       <main className="mx-auto w-full max-w-xl px-5 pb-16 pt-12 sm:pt-20">
-        <h1 className="text-[28px] font-semibold leading-tight tracking-tight sm:text-4xl">
+        <h1 className="text-[30px] font-semibold leading-[1.08] tracking-[-0.035em] text-gradient sm:text-[42px]">
           Let&apos;s get your numbers in.
         </h1>
         <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">

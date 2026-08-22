@@ -79,7 +79,7 @@ function IntentScreen() {
         >
           <div className="p-5 sm:p-7">
             <p className="text-sm text-muted-foreground">Welcome to FinWise, Maya</p>
-            <h1 className="mt-2 text-[28px] font-semibold leading-tight tracking-tight sm:text-4xl">
+            <h1 className="mt-2 text-[30px] font-semibold leading-[1.08] tracking-[-0.035em] text-gradient sm:text-[42px]">
               What should FinWise do first?
             </h1>
             <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
