@@ -27,18 +27,35 @@ export const Route = createFileRoute("/stress-test")({
   component: StressTestScreen,
 });
 
+const BASE_COGS = 32;
+const BASE_LABOR = 25;
+
 function StressTestScreen() {
   const { overhead, industry, reset } = useOnboarding();
   const [impact, setImpact] = useState(0);
+  const [cogs, setCogs] = useState(BASE_COGS);
+  const [labor, setLabor] = useState(BASE_LABOR);
   const [tested, setTested] = useState(false);
 
-  const p = project(overhead, impact / 100);
+  // Operational ratios convert directly into monthly overhead relief/pressure.
+  const monthlyDelta =
+    ((BASE_COGS - cogs) / 100) * SAMPLE.monthlyRevenue +
+    ((BASE_LABOR - labor) / 100) * SAMPLE.monthlyRevenue;
+  const adjustedOverhead = Math.max(0, overhead - monthlyDelta);
+
+  const baseline = project(overhead, impact / 100);
+  const p = project(adjustedOverhead, impact / 100);
   const remaining = p.runwayDays === null ? 90 : p.runwayDays;
+
+  const baseDays = baseline.runwayDays ?? 90;
+  const newDays = p.runwayDays ?? 90;
+  const dayShift = newDays - baseDays;
 
   return (
     <div className="min-h-screen">
       <ProgressRail step={4} back="/runway" />
-      <main className="mx-auto w-full max-w-3xl px-5 pb-20 pt-8 sm:pt-12">
+      <main className="mx-auto w-full max-w-5xl px-5 pb-20 pt-8 sm:pt-12">
+
         <div
           key={tested ? "protected" : "decayed"}
           className={
