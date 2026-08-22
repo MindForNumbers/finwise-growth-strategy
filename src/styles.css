@@ -155,6 +155,10 @@
   --positive: oklch(0.72 0.16 152.5);
   --caution: oklch(0.82 0.15 78);
   --negative: oklch(0.66 0.2 27.5);
+  --elev-hairline: 0 1px 2px oklch(0 0 0 / 0.4);
+  --elev-soft: 0 1px 2px oklch(0 0 0 / 0.4), 0 4px 12px -4px oklch(0 0 0 / 0.5);
+  --elev-elevated: 0 1px 2px oklch(0 0 0 / 0.4), 0 12px 32px -12px oklch(0 0 0 / 0.6);
+  --elev-float: 0 2px 4px oklch(0 0 0 / 0.4), 0 24px 60px -24px oklch(0 0 0 / 0.7);
 }
 
 @layer base {
@@ -162,11 +166,87 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.011em;
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01", "tnum" 0;
+    background-image:
+      radial-gradient(
+        900px 520px at 12% -8%,
+        color-mix(in oklab, var(--color-primary) 9%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        760px 460px at 92% 4%,
+        color-mix(in oklab, var(--color-primary) 5%, transparent),
+        transparent 70%
+      );
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.024em;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 22%, transparent);
   }
 }
+
+/* Premium surface treatments */
+@utility surface-card {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-card) 100%, transparent),
+    color-mix(in oklab, var(--color-card) 92%, var(--color-background))
+  );
+  border: 1px solid color-mix(in oklab, var(--color-border) 85%, transparent);
+  box-shadow: var(--elev-elevated);
+}
+
+@utility surface-glass {
+  background: color-mix(in oklab, var(--color-card) 66%, transparent);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid color-mix(in oklab, var(--color-border) 70%, transparent);
+  box-shadow: var(--elev-float);
+}
+
+@utility text-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--color-foreground),
+    color-mix(in oklab, var(--color-foreground) 62%, var(--color-background))
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility sheen {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, white 22%, transparent),
+      transparent 45%
+    );
+  }
+}
+
