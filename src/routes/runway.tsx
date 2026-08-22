@@ -283,7 +283,7 @@ function GoalCascade() {
           aria-hidden={allDone}
         >
           <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
-            ⚡ Today&apos;s Recommended Sidequests
+            ⚡ Today&apos;s Recommended Maneuvers
           </p>
           <ul className="mt-4 space-y-2">
             {config.sidequests.map((quest, i) => {
