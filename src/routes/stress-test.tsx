@@ -5,6 +5,7 @@ import { AlertTriangle, RotateCcw, ShieldCheck, Waves } from "lucide-react";
 import { ProgressRail } from "@/components/onboarding/progress-rail";
 import { AppleSlider } from "@/components/onboarding/apple-slider";
 import { RunwayChart } from "@/components/onboarding/runway-chart";
+import { ModelInfoPopover } from "@/components/onboarding/model-info";
 import { INDUSTRIES, SAMPLE, money, project } from "@/lib/finwise";
 import { useOnboarding } from "@/lib/onboarding-context";
 
@@ -87,15 +88,26 @@ function StressTestScreen() {
 
         <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
           <div className="relative rounded-3xl surface-card p-6">
-            <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="flex items-center gap-1.5">
+              <h2 className="text-[15px] font-semibold tracking-[-0.01em]">
+                Macro Threat Stress-Test
+              </h2>
+              <ModelInfoPopover model="macro" />
+            </div>
+            <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="text-[13px] uppercase tracking-wide text-muted-foreground">
-                  Days of cash left
-                </p>
+                <div className="flex items-center gap-1.5">
+                  <h2 className="text-[13px] uppercase tracking-wide text-muted-foreground">
+                    Baseline Cash Runway
+                  </h2>
+                  <ModelInfoPopover model="baseline" />
+                </div>
                 <p className="mt-1 text-6xl font-semibold tracking-tight tabular-nums">
                   {p.runwayDays === null ? "90+" : p.runwayDays}
                 </p>
+                <p className="mt-1 text-[13px] text-muted-foreground">Days of cash left</p>
               </div>
+
               <p className="text-right text-[13px] leading-relaxed text-muted-foreground">
                 Opening balance
                 <span className="block text-[15px] font-medium text-foreground tabular-nums">
