@@ -64,7 +64,7 @@ function StressTestScreen() {
         <p className="mt-4 text-[13px] text-muted-foreground">
           One week later · {INDUSTRIES[industry].label}
         </p>
-        <h1 className="mt-1 text-[26px] font-semibold tracking-tight sm:text-3xl">
+        <h1 className="mt-1 text-[27px] font-semibold tracking-[-0.035em] text-gradient sm:text-[34px]">
           Weekly stress test
         </h1>
 

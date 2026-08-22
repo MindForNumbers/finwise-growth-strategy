@@ -56,7 +56,7 @@ function RunwayScreen() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <p className="text-[13px] text-muted-foreground">{SAMPLE.company}</p>
-            <h1 className="mt-1 text-[26px] font-semibold tracking-tight sm:text-3xl">
+            <h1 className="mt-1 text-[27px] font-semibold tracking-[-0.035em] text-gradient sm:text-[34px]">
               Your cash runway
             </h1>
           </div>
