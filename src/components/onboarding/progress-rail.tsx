@@ -5,7 +5,7 @@ const STEPS = ["/", "/connect", "/drivers", "/runway", "/stress-test"] as const;
 
 export function ProgressRail({ step, back }: { step: number; back?: string }) {
   return (
-    <header className="sticky top-0 z-20 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-20 border-b border-border/50 bg-background/60 shadow-[0_1px_0_oklch(1_0_0/0.6)_inset] backdrop-blur-2xl backdrop-saturate-150">
       <div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-4 px-5">
         <div className="flex w-20 items-center">
           {back ? (
@@ -17,9 +17,10 @@ export function ProgressRail({ step, back }: { step: number; back?: string }) {
               Back
             </Link>
           ) : (
-            <span className="text-[15px] font-semibold tracking-tight">FinWise</span>
+            <span className="text-[15px] font-semibold tracking-[-0.03em]">FinWise</span>
           )}
         </div>
+
         <div className="flex flex-1 items-center justify-center gap-1.5">
           {STEPS.map((s, i) => (
             <span

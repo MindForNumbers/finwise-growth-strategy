@@ -64,11 +64,11 @@ function StressTestScreen() {
         <p className="mt-4 text-[13px] text-muted-foreground">
           One week later · {INDUSTRIES[industry].label}
         </p>
-        <h1 className="mt-1 text-[26px] font-semibold tracking-tight sm:text-3xl">
+        <h1 className="mt-1 text-[27px] font-semibold tracking-[-0.035em] text-gradient sm:text-[34px]">
           Weekly stress test
         </h1>
 
-        <div className="relative mt-5 rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.4)]">
+        <div className="relative mt-5 rounded-3xl surface-card p-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-[13px] uppercase tracking-wide text-muted-foreground">
@@ -107,7 +107,7 @@ function StressTestScreen() {
           </div>
         </div>
 
-        <div className="mt-5 rounded-3xl border border-border bg-card p-6">
+        <div className="mt-5 rounded-3xl surface-card p-6">
           <div className="flex items-center justify-between">
             <p className="text-[15px] font-medium">Simulate market impact</p>
             <span className="text-[15px] font-semibold tabular-nums text-primary">

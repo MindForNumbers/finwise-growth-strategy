@@ -61,7 +61,7 @@ function ConnectScreen() {
     <div className="min-h-screen">
       <ProgressRail step={1} back="/" />
       <main className="mx-auto w-full max-w-xl px-5 pb-16 pt-12 sm:pt-20">
-        <h1 className="text-[28px] font-semibold leading-tight tracking-tight sm:text-4xl">
+        <h1 className="text-[30px] font-semibold leading-[1.08] tracking-[-0.035em] text-gradient sm:text-[42px]">
           Let&apos;s get your numbers in.
         </h1>
         <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
@@ -74,7 +74,7 @@ function ConnectScreen() {
             <button
               type="button"
               onClick={start}
-              className="group flex w-full items-center gap-4 rounded-2xl border border-primary bg-primary p-5 text-left text-primary-foreground transition-all hover:opacity-95 active:scale-[0.99]"
+              className="group flex w-full items-center gap-4 rounded-2xl btn-premium p-5 text-left"
             >
               <Sparkles strokeWidth={1.5} className="size-6 shrink-0" />
               <span>
@@ -97,7 +97,7 @@ function ConnectScreen() {
                   key={o.label}
                   type="button"
                   onClick={start}
-                  className="flex w-full items-center gap-4 rounded-2xl border border-border bg-card p-5 text-left opacity-70 transition-all hover:opacity-100"
+                  className="flex w-full items-center gap-4 rounded-2xl surface-card p-5 text-left opacity-70 transition-all hover:opacity-100"
                 >
                   <Icon strokeWidth={1.5} className="size-6 shrink-0 text-muted-foreground" />
                   <span>
@@ -114,7 +114,7 @@ function ConnectScreen() {
             </p>
           </div>
         ) : (
-          <div className="mt-8 rounded-3xl border border-border/70 bg-card/70 p-6 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.3)] backdrop-blur-2xl">
+          <div className="mt-8 rounded-3xl surface-glass p-6 backdrop-blur-2xl">
             <div className="flex items-baseline justify-between">
               <p className="text-[15px] font-medium">
                 {progress >= 1 ? "Sync complete" : config.syncLine}

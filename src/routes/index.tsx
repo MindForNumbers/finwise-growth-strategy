@@ -79,7 +79,7 @@ function IntentScreen() {
         >
           <div className="p-5 sm:p-7">
             <p className="text-sm text-muted-foreground">Welcome to FinWise, Maya</p>
-            <h1 className="mt-2 text-[28px] font-semibold leading-tight tracking-tight sm:text-4xl">
+            <h1 className="mt-2 text-[30px] font-semibold leading-[1.08] tracking-[-0.035em] text-gradient sm:text-[42px]">
               What should FinWise do first?
             </h1>
             <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
@@ -134,7 +134,7 @@ function IntentScreen() {
             <button
               type="button"
               onClick={() => navigate({ to: "/connect" })}
-              className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-[15px] font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.99]"
+              className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full btn-premium text-[15px] font-medium tracking-[-0.01em]"
             >
               Continue
               <ArrowRight strokeWidth={2} className="size-4" />
@@ -204,7 +204,7 @@ function WorkspaceSkeleton({ visible, label }: { visible: boolean; label: string
             <div key={i} className="h-24 rounded-2xl border border-border bg-card" />
           ))}
         </div>
-        <div className="mt-3 h-64 rounded-3xl border border-border bg-card p-6">
+        <div className="mt-3 h-64 rounded-3xl surface-card p-6">
           <div className="h-4 w-40 rounded-full bg-muted" />
           <div className="mt-6 h-40 rounded-2xl bg-gradient-to-t from-primary/15 to-transparent" />
         </div>

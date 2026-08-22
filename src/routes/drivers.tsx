@@ -34,14 +34,14 @@ function DriversScreen() {
     <div className="min-h-screen">
       <ProgressRail step={2} back="/connect" />
       <main className="mx-auto w-full max-w-xl px-5 pb-16 pt-12 sm:pt-20">
-        <h1 className="text-[28px] font-semibold leading-tight tracking-tight sm:text-4xl">
+        <h1 className="text-[30px] font-semibold leading-[1.08] tracking-[-0.035em] text-gradient sm:text-[42px]">
           One number and we&apos;re done.
         </h1>
         <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
           We estimated your overhead from the imported ledger. Nudge it if it looks off.
         </p>
 
-        <div className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.4)] sm:p-8">
+        <div className="mt-8 rounded-3xl surface-card p-6 sm:p-8">
           <div className="flex items-baseline justify-between">
             <p className="text-[13px] font-medium uppercase tracking-wide text-muted-foreground">
               Estimated monthly overhead
@@ -132,7 +132,7 @@ function DriversScreen() {
         <button
           type="button"
           onClick={() => navigate({ to: "/runway" })}
-          className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-[15px] font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.99]"
+          className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full btn-premium text-[15px] font-medium tracking-[-0.01em]"
         >
           Generate my 30-day runway
           <ArrowRight strokeWidth={2} className="size-4" />

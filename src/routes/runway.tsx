@@ -56,7 +56,7 @@ function RunwayScreen() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <p className="text-[13px] text-muted-foreground">{SAMPLE.company}</p>
-            <h1 className="mt-1 text-[26px] font-semibold tracking-tight sm:text-3xl">
+            <h1 className="mt-1 text-[27px] font-semibold tracking-[-0.035em] text-gradient sm:text-[34px]">
               Your cash runway
             </h1>
           </div>
@@ -87,7 +87,7 @@ function RunwayScreen() {
 
         <div className="my-6 h-px bg-border" />
 
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-[0_20px_50px_-35px_rgba(0,0,0,0.4)]">
+        <div className="rounded-3xl surface-card p-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-[13px] uppercase tracking-wide text-muted-foreground">
@@ -130,13 +130,13 @@ function RunwayScreen() {
 
           <Link
             to="/stress-test"
-            className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-4 text-[16px] font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_var(--color-primary)] transition-transform hover:brightness-105 active:scale-[0.985]"
+            className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl btn-premium px-6 py-4 text-[16px] font-semibold"
           >
             Enable Weekly Stress Test 🛡️
           </Link>
         </div>
 
-        <div className="mt-5 rounded-3xl border border-border bg-card p-6">
+        <div className="mt-5 rounded-3xl surface-card p-6">
           <div className="flex items-center justify-between">
             <p className="flex items-center gap-2 text-[15px] font-medium">
               <TrendingDown strokeWidth={1.5} className="size-4 text-muted-foreground" />
@@ -250,7 +250,7 @@ function GoalCascade() {
 
   return (
     <section className="mt-6 space-y-5" aria-label="Goal cascade">
-      <div className="rounded-3xl border border-border bg-card p-6">
+      <div className="rounded-3xl surface-card p-6">
         <p className="text-[13px] font-semibold uppercase tracking-wide text-muted-foreground">
           🎯 Q3 North Star
         </p>
@@ -276,7 +276,7 @@ function GoalCascade() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-6">
+      <div className="relative overflow-hidden rounded-3xl surface-card p-6">
         <div
           className={
             "transition-all duration-500 " +
@@ -400,7 +400,7 @@ function SidequestButton({
 
 function VelocityTicker() {
   return (
-    <div className="rounded-3xl border border-border bg-card p-6 sm:p-7">
+    <div className="rounded-3xl surface-card p-6 sm:p-7">
       <p className="text-[13px] text-muted-foreground">Today&apos;s Net Cash Velocity</p>
       <div className="mt-2 flex items-baseline gap-2">
         <span className="text-[42px] font-semibold tracking-tight text-[var(--color-positive)] sm:text-[56px]">
@@ -426,7 +426,7 @@ function ReceivablesRadar() {
   const activeIndex = 2; // Cleared
 
   return (
-    <div className="rounded-3xl border border-border bg-card p-5">
+    <div className="rounded-3xl surface-card p-5">
       <div className="flex items-center gap-2">
         <Receipt strokeWidth={1.5} className="size-4 text-muted-foreground" />
         <p className="text-[13px] font-medium text-muted-foreground">Inbound receivables</p>
@@ -495,7 +495,7 @@ function CapitalOptimizer() {
         <button
           type="button"
           onClick={() => setTransferred(true)}
-          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2 text-[13px] font-semibold text-primary-foreground shadow-[0_8px_20px_-12px_var(--color-primary)] transition-transform hover:brightness-105 active:scale-[0.985]"
+          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-full btn-premium px-4 py-2 text-[13px] font-semibold"
         >
           1-Tap Transfer
         </button>
@@ -553,7 +553,7 @@ function EngineCalibration() {
   ];
 
   return (
-    <section className="mt-5 rounded-3xl border border-border bg-card p-6" aria-label="Forecasting engine calibration">
+    <section className="mt-5 rounded-3xl surface-card p-6" aria-label="Forecasting engine calibration">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-[22px] font-semibold tracking-tight">⚙️ Forecasting Engine Calibration</h2>
