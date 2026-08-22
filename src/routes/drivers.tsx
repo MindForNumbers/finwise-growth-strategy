@@ -132,7 +132,7 @@ function DriversScreen() {
         <button
           type="button"
           onClick={() => navigate({ to: "/runway" })}
-          className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary text-[15px] font-medium text-primary-foreground transition-all hover:opacity-90 active:scale-[0.99]"
+          className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full btn-premium text-[15px] font-medium tracking-[-0.01em]"
         >
           Generate my 30-day runway
           <ArrowRight strokeWidth={2} className="size-4" />
