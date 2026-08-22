@@ -40,6 +40,9 @@ export const NORTH_STARS: Record<
     sidequests: [
       { text: "Reallocate $2,000 to your top-performing revenue channel.", reward: "+3% MRR Momentum" },
       { text: "Send a 1-tap upsell campaign to 10 existing customers.", reward: "Pipeline Boosted" },
+      { text: "Approve the 4% price uplift on your two lowest-margin plans.", reward: "+$1,900 Monthly" },
+      { text: "Re-engage 6 trial accounts that stalled in the last 14 days.", reward: "Conversion Lift" },
+      { text: "Shift $1,200 of idle ad budget to your best-converting campaign.", reward: "CAC Improved" },
     ],
   },
   risk: {
@@ -51,6 +54,9 @@ export const NORTH_STARS: Record<
     sidequests: [
       { text: "Send 1-tap automated reminder for Invoice #104 ($2,100).", reward: "+2 Days to Buffer" },
       { text: "Categorize 3 pending software expenses.", reward: "Accuracy Unlocked" },
+      { text: "Cancel 2 duplicate subscriptions flagged this week.", reward: "+$240 Monthly" },
+      { text: "Confirm next payroll coverage for the 15th ($14,600).", reward: "Payroll Secured" },
+      { text: "Set a low-balance alert at $8,000 across all 3 accounts.", reward: "Early Warning On" },
     ],
   },
   capital: {
@@ -62,8 +68,12 @@ export const NORTH_STARS: Record<
     sidequests: [
       { text: "Delay 1 non-essential contractor payout by 7 days.", reward: "+$4,500 Headroom" },
       { text: "Move $8,000 idle float to your high-yield sweep account.", reward: "Yield Activated" },
+      { text: "Renegotiate the annual software renewal due next month.", reward: "+$1,100 Freed" },
+      { text: "Convert 1 contractor line item into a part-time hire budget.", reward: "Headcount Modeled" },
+      { text: "Trim $600 from discretionary spend in Rent & Utilities.", reward: "+$600 Headroom" },
     ],
   },
+
 };
 
 export const INDUSTRIES: Record<
