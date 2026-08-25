@@ -12,6 +12,5 @@ We are making an activation and behavioral design bet. We are focusing entirely 
 
 ## Growth loop
 
-_A link or image of the loop that compounds (acquisition → activation → retention → referral)._
+![FinWise compounding growth loop: acquisition → activation → retention → monetization & referral](growth-loop.jpeg)
 
-_____
