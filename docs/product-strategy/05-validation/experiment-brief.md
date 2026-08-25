@@ -14,10 +14,3 @@ If we deploy the active "Capital Efficiency Widget" to surface daily ROI opportu
 
 - **Guardrail:** Bank/Accounting Data Sync Drop-off. Forcing users to confront "inefficiencies" requires deep data access; our onboarding completion rate must not degrade by more than 2%.
 - **Read date:** 21 Days post-launch. This allows a 1-week acquisition cohort to fully run through the 14-day reverse trial window, providing a clean data set without peeking early.
-
-_____
-
-## Guardrail + read date
-
-- **Guardrail:** _the metric that must not degrade (and by how much)._
-- **Read date:** _when you call it, no peeking._
